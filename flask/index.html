@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+</head>
+<body>
+{% if update_fun %}
+ <h2>Todo List</h2>
+ <form method="POST" action="{{url_for('.update',id=update_fun.id)}}" ">
+  <table>
+    <tr>
+        <td>
+            TASK
+        </td>
+        <td>
+            <input type="Text" name="work" placeholder="Enter the update">
+        </td>
+    </tr>
+     <tr>
+        <td>
+        </td>
+        <td>
+            <input type="submit" value="Click me to Update">
+        </td>
+    </tr>
+  </table>
+ </form>
+
+{% else %}
+ <h2>Todo List</h2>
+ <form method="post" action="{{url_for('.add')}}">
+  <table>
+    <tr>
+        <td>
+            TASK
+        </td><TD>
+        <input type="Text" placeholder="Enter_work" name="work">
+    </TD></tr><tr><td></td>
+        <td><input type="submit" value="Click me to Add"></td>
+    </tr>
+  </table>
+ </form>
+{% endif %}
+
+<form method="GET" action="{{url_for('.index')}}">
+    <table>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                TASK
+            </td><td>
+            TIME
+        </td>
+        </tr>
+        {% for i in data %}
+         <tr>
+            <td>
+                {{i.id}}
+            </td>
+            <td>
+                {{i.task}}
+            </td>
+            <td>
+                {{i.date}}
+            </td>
+            <td>
+                <a href="{{url_for('.update',id=i.id)}}">Update</a>
+                <a href="{{url_for('.delete',id=i.id)}}">Delete</a>
+            </td>
+         </tr>
+        {% endfor %}
+    </table>
+</form>
+
+</body>
+</html>
